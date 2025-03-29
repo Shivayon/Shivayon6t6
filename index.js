@@ -8,19 +8,19 @@ const {hostRouter} = require('./routes/hostRouter');
 const rootDir=require("./utils/pathutils");
 
 
-const ap=express();
+const app=express();
 
-ap.set('view engine','ejs');
-ap.set('views','views');
+app.set('view engine','ejs');
+app.set('views','views');
 
 
 
-ap.use(express.urlencoded());
-ap.use(userRouter);
-ap.use("/host",hostRouter);
-ap.use(express.static(path.join(rootDir,'public')));
+app.use(express.urlencoded());
+app.use(userRouter);
+app.use("/host",hostRouter);
+app.use(express.static(path.join(rootDir,'public')));
 
-ap.use((req,res,next)=>{
+app.use((req,res,next)=>{
   res.status(404).render('404pagenotfound',{pageTitle:'Page Not Found'});
 })
 
@@ -29,6 +29,6 @@ ap.use((req,res,next)=>{
 
 
 const PORT=3008;
-ap.listen(PORT,()=>{
+app.listen(PORT,()=>{
   console.log(`server running on adress http://localhost:${PORT}`);
 });
